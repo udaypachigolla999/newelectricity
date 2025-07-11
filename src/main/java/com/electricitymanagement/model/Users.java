@@ -23,6 +23,15 @@ public class Users
 		this.password = password;
 		this.role = role;
 	}
+	public Users(int id, String customerId, String email, String userName, String role) {
+		super();
+		this.id = id;
+		this.customerId = customerId;
+		this.email = email;
+		this.userName = userName;
+		
+		this.role = role;
+	}
 	public Users(String customerId,int id, String email, String userName, String role, String status) {
 		
 		this.id = id;

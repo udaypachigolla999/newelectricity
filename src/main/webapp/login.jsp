@@ -95,7 +95,7 @@ body, html {
 		%>
 		    <p style="color: red;"><%= msg2 %></p>
 		<%
-		        session.removeAttribute("msg2"); // clear it after displaying
+		        session.removeAttribute("msg2"); 
 		    }
 		%>
             <h2>Login to your Account</h2>
@@ -104,6 +104,7 @@ body, html {
                 <input type="password" name="password" placeholder="Enter your password" required>
                 <button type="submit">Login</button>
                 <p class="register-link">Not registered yet? <a href="register.jsp">Register</a></p>
+                <p class="register-link">Deactivated your account? <a href="restoreAccount.jsp">Restore Account</a></p> 
             </form>
         </div>
     </div>

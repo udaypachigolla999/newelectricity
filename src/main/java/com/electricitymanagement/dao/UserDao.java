@@ -134,5 +134,50 @@ public class UserDao {
         }
     }
 
-	
+	public static int updateUserProfile(String email, String name, String mobile, String address) throws Exception {
+		
+		
+		// TODO Auto-generated method stub
+		 DbUtility dbutil = new DbUtility();
+	        try (Connection con = dbutil.createConnection();
+	             PreparedStatement ps = con.prepareStatement("update customer set email=?,name=?,mobile=?,address=? WHERE email = ?")) {
+	            ps.setString(1, email);
+	            ps.setString(2, name);
+	            ps.setString(3, mobile);
+	            ps.setString(4, address);
+	            ps.setString(5, email);
+	            int rs = ps.executeUpdate();
+	            if(rs>=1)
+	            {
+	            	return 1;
+	            }
+	            else
+	            {
+	            	return 0;
+	            }
+	            
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            throw new Exception("Error checking customer existence: " + e.getMessage());
+	        }
+		
+		
+	}
+	 public static boolean restoreAccount(String email) {
+	        boolean isRestored = false;
+	        DbUtility dbutil = new DbUtility();
+	        try {
+	        	Connection connection = dbutil.createConnection();
+	            String query = "UPDATE customer SET status = 'active' WHERE email = ? AND status = 'inactive'";
+	            PreparedStatement statement = connection.prepareStatement(query);
+	            statement.setString(1, email);
+	            int rowsUpdated = statement.executeUpdate();
+	            isRestored = (rowsUpdated > 0);
+	            connection.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return isRestored;
+	    }
+
 }

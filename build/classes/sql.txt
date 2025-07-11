@@ -48,3 +48,7 @@ update bill set status='Pending' where billid in (1,2,3,4,5,6);
 
 
 update login set role='admin' where id=5;
+
+
+
+update customer set status='inactive' where customerid='161';

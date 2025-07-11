@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 
 @SuppressWarnings("serial")
@@ -33,8 +34,13 @@ public class RegisterServlet extends HttpServlet {
         	
             boolean success = UserDao.registerCustomer(cust, user);
             if (success) {
-            	System.out.println("Successfull");
-                req.getRequestDispatcher("login.jsp").forward(req, res);
+            	System.out.println("Successfull");res.setContentType("text/html");
+            	PrintWriter out = res.getWriter();
+            	out.println("<script type='text/javascript'>");
+            	out.println("alert('Resistration successful! Redirecting to login page...');");
+            	out.println("window.location.href = 'login.jsp';");
+            	out.println("</script>");
+            	
             } else {
             	System.out.println("ERROR");
                 req.setAttribute("msg", "Email already exists!");

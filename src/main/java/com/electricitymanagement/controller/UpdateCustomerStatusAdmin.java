@@ -1,5 +1,3 @@
-
-
 package com.electricitymanagement.controller;
 
 import com.electricitymanagement.dao.CustomerDao;

@@ -117,8 +117,11 @@ body {
                 out.print(username != null ? username : "Guest");
             %>
         </span>
-        <form method="post" action="login.jsp" style="margin: 0;">
+        <form method="post" action="LogoutServlet" style="margin: 0;">
             <button class="logout-btn" type="submit">Logout</button>
+        </form>
+        <form method="get" action="profile" style="margin: 0;">
+            <button class="logout-btn" type="submit">View & Edit Profile</button>
         </form>
     </div>
 </div>

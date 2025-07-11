@@ -62,6 +62,32 @@ public class CustomerDao {
         return cList;
 	}
 	
+	public static Customer getCustomerById(String customerId) throws Exception {
+		DbUtility dbutil=new DbUtility();
+		
+		Customer c = null;
+		System.out.println("Inside Customer");
+        try {
+            Connection con = dbutil.createConnection(); 
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM customer WHERE customerId = ?");
+            ps.setString(1, customerId);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("Inside customer final");
+            if (rs.next()) {
+            	c = new Customer(rs.getString("customerId"), rs.getString("name"), rs.getString("email"), rs.getString("mobile"),rs.getString("address"),rs.getString("status"));
+            	
+                
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+            throw new Exception("Error fetching customers: " + e.getMessage());
+        }
+
+        return c;
+	}
+	
 	public static void updateCustomerStatus(String customerId, String status) throws Exception {
 	    DbUtility dbutil = new DbUtility();
 
@@ -77,5 +103,6 @@ public class CustomerDao {
 	        e.printStackTrace();
 	        throw new Exception("Error updating customer status: " + e.getMessage());
 	    }
-	}
+          }
+	
 }

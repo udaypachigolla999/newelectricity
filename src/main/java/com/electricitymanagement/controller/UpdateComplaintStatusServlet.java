@@ -1,5 +1,3 @@
-
-
 package com.electricitymanagement.controller;
 
 import java.io.IOException;
@@ -29,4 +27,4 @@ public class UpdateComplaintStatusServlet extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-}
+  }

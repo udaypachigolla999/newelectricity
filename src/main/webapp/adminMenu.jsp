@@ -122,7 +122,7 @@ margin: 0;}
                 out.print(username != null ? username : "admin");
             %>
         </span>
-        <form method="post" action="login.jsp" style="margin: 0;">
+        <form method="post" action="LogoutServlet" style="margin: 0;">
             <button class="logout-btn" type="submit">Logout</button>
         </form>
     </div>
