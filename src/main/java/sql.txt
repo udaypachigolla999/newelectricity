@@ -1,0 +1,50 @@
+create table customer(customerId varchar(30),name varchar(30),email varchar(30),mobile varchar(30),address varchar(30),status varchar(30));
+
+
+create table login(id int GENERATED ALWAYS AS IDENTITY(START WITH 1,INCREMENT BY 1) PRIMARY KEY,
+customerId varchar(30),email varchar(30),userName varchar(30),password varchar(30),role varchar(30));
+
+
+create table bill(billId int GENERATED ALWAYS AS IDENTITY(START WITH 1,INCREMENT BY 1) PRIMARY KEY,
+customerId varchar(30),amount decimal(10,2),status varchar(30),
+paymentId varchar(30),paymentDate DATE ,paymentTime TIME);
+
+
+create table complaint(complaintId int GENERATED ALWAYS AS IDENTITY(START WITH 1,INCREMENT BY 1) PRIMARY KEY,
+customerId varchar(30),complaintType varchar(30),description varchar(300),
+status varchar(30));
+
+insert into COMPLAINT(customerid,complaintType,description,status) values('121','payment issue','payment not success but money debited','open');
+
+
+select * from CUSTOMER;
+
+select * from login;
+
+select * from bill; 
+
+select * from complaint;
+
+
+drop table customer;
+drop table login;
+drop table bill;
+
+INSERT INTO bill(customerId,amount,status,paymentId,paymentDate,paymentTime) VALUES ('121', 2000, 'Pending', 'Empty',NULL,NULL);
+
+INSERT INTO bill(customerId,amount,status,paymentId,paymentDate,paymentTime) VALUES ('121', 1200, 'Pending', 'Empty',NULL,NULL);
+
+INSERT INTO bill(customerId,amount,status,paymentId,paymentDate,paymentTime) VALUES ('121', 1500, 'Success', 'PAY124',NULL,NULL);
+
+INSERT INTO bill(customerId,amount,status,paymentId,paymentDate,paymentTime) VALUES ('121', 800, 'Pending', 'Empty',NULL,NULL);
+
+INSERT INTO bill(customerId,amount,status,paymentId,paymentDate,paymentTime) VALUES ('161', 1800, 'Pending', 'Empty',NULL,NULL);
+
+INSERT INTO bill(customerId,amount,status,paymentId,paymentDate,paymentTime) VALUES ('161', 500, 'Success', 'PAY139',NULL,NULL);
+
+
+
+update bill set status='Pending' where billid in (1,2,3,4,5,6);
+
+
+update login set role='admin' where id=5;
