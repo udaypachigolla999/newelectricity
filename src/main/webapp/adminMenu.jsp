@@ -97,7 +97,7 @@ margin: 0;}
             <button>Bills <span class="arrow">▼</span></button>
             <div class="dropdown-content">
                 <a href="view-billsHistory">View All Bills</a>
-                <a href="add-bill">Add New Bill</a>
+                <a href="addBill.jsp">Add New Bill</a>
             </div>
         </div>
         <div class="dropdown">

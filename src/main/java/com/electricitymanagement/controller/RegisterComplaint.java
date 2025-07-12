@@ -1,6 +1,8 @@
 package com.electricitymanagement.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,9 +46,17 @@ public class RegisterComplaint extends HttpServlet {
         	System.out.println("In register complaint  hii111");
         	
             boolean success = ComplaintDao.registerComplaint(comp);
+            
+       
             if (success) {
-            	System.out.println("Complaint register Successfull");
-                res.sendRedirect("view-complaints");
+            	System.out.println("Successfull");
+            	res.setContentType("text/html");
+            	PrintWriter out = res.getWriter();
+            	out.println("<script type='text/javascript'>");
+            	out.println("alert('Complaint Registered Successfull! Redirecting to View Complaints page...');");
+            	out.println("window.location.href = 'view-complaints';");
+            	out.println("</script>");
+            	
             } else {
             	System.out.println("ERROR");
                 

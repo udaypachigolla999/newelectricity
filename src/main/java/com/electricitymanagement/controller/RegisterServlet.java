@@ -34,10 +34,11 @@ public class RegisterServlet extends HttpServlet {
         	
             boolean success = UserDao.registerCustomer(cust, user);
             if (success) {
-            	System.out.println("Successfull");res.setContentType("text/html");
+            	System.out.println("Successfull");
+            	res.setContentType("text/html");
             	PrintWriter out = res.getWriter();
             	out.println("<script type='text/javascript'>");
-            	out.println("alert('Resistration successful! Redirecting to login page...');");
+            	out.println("alert('Registration successful! Redirecting to login page...');");
             	out.println("window.location.href = 'login.jsp';");
             	out.println("</script>");
             	

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.electricitymanagement.dao.UserDao;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/add-bill")
 public class AddBillServlet extends HttpServlet {
@@ -29,22 +30,28 @@ public class AddBillServlet extends HttpServlet {
             Bill bill = new Bill(customerId, amount, "Pending", null, null, null);
 
             boolean success = BillDao.addBill(bill);
-
+        
             if (success) {
-                request.setAttribute("message", "Bill added successfully.");
+            	System.out.println("Successfull");
+            	response.setContentType("text/html");
+            	PrintWriter out = response.getWriter();
+            	out.println("<script type='text/javascript'>");
+            	out.println("alert('Bill added successfully! Redirecting to view bills page...');");
+            	out.println("window.location.href = 'addBill.jsp';");
+            	out.println("</script>");
+            	
             } else {
-                request.setAttribute("error", "Failed to add bill.");
+            	System.out.println("ERROR");
+            	request.setAttribute("msg", "Bill not added!");
+                request.getRequestDispatcher("addBill.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
-            request.setAttribute("error", "Error: " + e.getMessage());
-            e.printStackTrace();
+//            req.setAttribute("error", e.getMessage());
+//            req.getRequestDispatcher("error.jsp").forward(req, res);
         }
-
-        request.getRequestDispatcher("addBill.jsp").forward(request, response);
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("addBill.jsp").forward(request, response);
-    }
-}
+  }
+            
+            
+         
