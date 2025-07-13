@@ -124,6 +124,7 @@
 
 
 
+
 <jsp:include page="menu.jsp" />
 
 <div class="hero-section">

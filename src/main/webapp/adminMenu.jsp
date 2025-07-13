@@ -149,13 +149,17 @@ body {
 
 <div class="navbar">
   <!-- Brand -->
-  <div class="nav-brand">
-    <span class="material-icons">bolt</span>
-    <span>Electricity Management System</span>
-  </div>
+	<div class="nav-brand">
+	  <a href="adminHome.jsp" style="display: flex; align-items: center; gap: 8px; color: white; text-decoration: none;">
+	    <span class="material-icons" style="font-size: 24px; color: #ffcc00;">bolt</span>
+	    <span style="font-size: 20px; font-weight: bold;">Electricity Management System</span>
+	  </a>
+	</div>
 
   <!-- Center Navigation -->
   <div class="nav-center">
+  
+  	<a href="adminHome.jsp" style="color: white; font-size: 16px; text-decoration: none; padding: 10px;">Home</a>
     <div class="dropdown">
       <button>Bills <span class="material-icons" style="font-size: 16px;">expand_more</span></button>
       <div class="dropdown-content">

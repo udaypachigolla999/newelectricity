@@ -67,11 +67,32 @@
         button:hover {
             background-color:  #0275d8;
         }
+        .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
         
     </style>
 </head>
 <body>
+<div class="container">
+    <!-- 🔹 Header Section (copied from login page) -->
+    <div class="header" style="text-align:center; margin-bottom: 20px;">
+        <h1 style="color: #0275d8; margin-bottom: 5px;">Electricity Bill Management</h1>
+        <p style="margin-top: 0; color: #555;">Manage your bills, payments and complaints efficiently</p>
+    </div>
   <div class="form-container">
+  <%
+		    String msg2 = (String) session.getAttribute("msg2");
+		    if (msg2 != null) {
+		%>
+		    <p style="color: red;"><%= msg2 %></p>
+		<%
+		        session.removeAttribute("msg2"); 
+		    }
+		%>
     <h2>Customer Registration</h2>
     <form action="register" method="post" onsubmit="return validateForm()">
       <label for="consumerId">Consumer Number</label>
@@ -120,11 +141,8 @@
 		
    
       <button type="submit">Register</button>
-      <p style="text-align: center; margin-top: 15px;">
-	  Already have an account? 
-	  <a href="login.jsp" style="color: #0275d8; text-decoration: none;">Login</a>
-</p>
     </form>
+  </div>
   </div>
 </body>
 </html>

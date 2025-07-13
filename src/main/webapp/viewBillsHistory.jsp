@@ -147,7 +147,7 @@
     %>
         <table>
             <tr>
-                <th>Payment Id</th>
+            	<th>Bill Id</th>
                 <th>Amount</th>
                 <!-- <th>Payment Date</th>
                 <th>Payment Time</th> -->
@@ -165,7 +165,7 @@
                         }
             %>
             <tr>
-                <td><%= bill.getPaymentId() %></td>
+            	<td><%= bill.getBillId() %></td>
                 <td>&#8377;<%= bill.getAmount() %></td>
                 <%-- <td><%= bill.getPaymentDate() %></td>
                 <td><%= bill.getPaymentTime() %></td> --%>

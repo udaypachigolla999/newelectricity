@@ -66,7 +66,7 @@
     <h2>Add New Bill</h2>
 
     <form method="post" action="add-bill">
-        <label>Customer ID:</label>
+        <label>Customer Number:</label>
         <input type="text" name="customerId" required>
 
         <label>Amount:</label>

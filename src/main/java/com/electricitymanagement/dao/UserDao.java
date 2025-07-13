@@ -38,7 +38,7 @@ public class UserDao {
 		return con;
     }
 
-    public static boolean registerCustomer(Customer customer, Users user) throws Exception {
+    public static int registerCustomer(Customer customer, Users user) throws Exception {
         System.out.println("HIi - Starting customer registration");
 
         Connection con = getConnection();
@@ -49,7 +49,14 @@ public class UserDao {
 	      ResultSet rs = check.executeQuery();
 	      if (rs.next()) {
 	          System.out.println("Hi - Email already exists");
-	          return false;
+	          return 1;
+	      }
+	      check = con.prepareStatement("SELECT * FROM login WHERE customerid=?");
+	      check.setString(1, user.getCustomerId());
+	      rs = check.executeQuery();
+	      if (rs.next()) {
+	          System.out.println("Hi - Consumer no. already exists");
+	          return 2;
 	      }
 
         // 2. Insert into customer table
@@ -97,9 +104,9 @@ public class UserDao {
         
         catch (Exception e) {
         	System.out.println(e.getMessage());
-        	return false;
+        	return 0;
         }
-        return true;
+        return 3;
     }
 
     public static Users login(String email, String password) throws Exception {

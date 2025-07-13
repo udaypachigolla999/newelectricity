@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
@@ -62,14 +63,21 @@ public class ProfileServlet extends HttpServlet {
 			}
 			else
 			{
-				System.out.println("Successfully updated profile");
+				System.out.println("Successfully updated profile 1");
+            	res.setContentType("text/html");
+            	PrintWriter out = res.getWriter();
+            	out.println("<script type='text/javascript'>");
+            	out.println("alert('Your profile successfully updated');");
+            	out.println("window.location.href = 'profile';");
+            	out.println("</script>");
+				
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-        // Redirect to the profile page after updating
-        res.sendRedirect("home.jsp");
+//        // Redirect to the profile page after updating
+//        res.sendRedirect("profile");
     }
 }

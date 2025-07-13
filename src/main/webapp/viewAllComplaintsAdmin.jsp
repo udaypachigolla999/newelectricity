@@ -123,7 +123,7 @@
 
         <div class="search-container">
             <form action="SearchComplaintsServlet" method="get">
-                <input type="text" name="customerId" placeholder="Enter Customer ID" required>
+                <input type="text" name="customerId" placeholder="Enter Consumer Number" required>
                 <input type="submit" value="Search">
             </form>
         </div>
@@ -137,7 +137,7 @@
         %>
             <table>
                 <tr>
-                    <th>Customer Id</th>
+                    <th>Consumer Number</th>
                     <th>Complaint Id</th>
                     <th>Complaint Type</th>
                     <th>Description</th>

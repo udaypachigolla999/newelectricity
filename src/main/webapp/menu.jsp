@@ -153,13 +153,20 @@
 <body>
   <div class="navbar">
     <!-- Brand -->
-    <div class="nav-brand">
-      <span class="material-icons">bolt</span>
-      <span>Electricity Management System</span>
-    </div>
+   
+
+	<div class="nav-brand">
+	  <a href="home.jsp" style="display: flex; align-items: center; gap: 8px; color: white; text-decoration: none;">
+	    <span class="material-icons" style="font-size: 24px; color: #ffcc00;">bolt</span>
+	    <span style="font-size: 20px; font-weight: bold;">Electricity Management System</span>
+	  </a>
+	</div>
 
     <!-- Center Navigation -->
     <div class="nav-center">
+    	<a href="home.jsp" style="color: white; font-size: 16px; text-decoration: none; padding: 10px;">Home</a>
+    
+    
       <div class="dropdown">
         <button>Bills <span class="material-icons" style="font-size: 16px;">expand_more</span></button>
         <div class="dropdown-content">
@@ -189,8 +196,12 @@
         </button>
         <div class="profile-content">
           <form method="get" action="profile">
-            <button type="submit">View Profile</button>
+            <button type="submit">View & Edit Profile</button>
           </form>
+          <form method="post" action="DeactivateAccountServlet" onsubmit="return confirm('Are you sure you want to deactivate your account?')">
+			  <button type="submit">Deactivate Account</button>
+		  </form>
+          
           <form method="post" action="LogoutServlet">
             <button type="submit">Logout</button>
           </form>

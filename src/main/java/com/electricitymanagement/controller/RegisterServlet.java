@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@SuppressWarnings("serial")
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -32,8 +31,8 @@ public class RegisterServlet extends HttpServlet {
             
         	System.out.println("hii111");
         	
-            boolean success = UserDao.registerCustomer(cust, user);
-            if (success) {
+            int success = UserDao.registerCustomer(cust, user);
+            if (success==3) {
             	System.out.println("Successfull");
             	res.setContentType("text/html");
             	PrintWriter out = res.getWriter();
@@ -42,11 +41,17 @@ public class RegisterServlet extends HttpServlet {
             	out.println("window.location.href = 'login.jsp';");
             	out.println("</script>");
             	
-            } else {
+            } else if(success==1) {
             	System.out.println("ERROR");
-                req.setAttribute("msg", "Email already exists!");
+            	req.getSession().setAttribute("msg2", "Email already exists!");
                 req.getRequestDispatcher("register.jsp").forward(req, res);
             }
+            else if(success==2) {
+            	System.out.println("ERROR");
+            	req.getSession().setAttribute("msg2", "Consumer No. already exists!");
+                req.getRequestDispatcher("register.jsp").forward(req, res);
+            }
+            
 
         } catch (Exception e) {
 //            req.setAttribute("error", e.getMessage());

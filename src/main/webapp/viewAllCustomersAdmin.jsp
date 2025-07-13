@@ -128,7 +128,7 @@
 
     <div class="search-container">
         <form action="SearchCustomers" method="get">
-            <input type="text" name="customerId" placeholder="Enter Customer ID" required>
+            <input type="text" name="customerId" placeholder="Enter Consumer Number" required>
             <input type="submit" value="Search">
         </form>
     </div>
@@ -143,7 +143,7 @@
     %>
         <table>
             <tr>
-                <th>Customer ID</th>
+                <th>Consumer Number</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Address</th>

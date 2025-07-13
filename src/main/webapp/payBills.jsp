@@ -121,7 +121,7 @@
             </div>
             <div>
                 <label for="cvv">CVV</label>
-                <input type="password" id="cvv" placeholder="CVC" required maxlength="3" />
+                <input type="password" id="cvv" placeholder="CVV" required maxlength="3" />
             </div>
         </div>
 
@@ -129,7 +129,7 @@
         <input type="text" id="cardholder" placeholder="Enter card holder name" required />
 
         <div class="payment-amount">
-            Payment Amount:â¹<%= amount %>
+            Payment Amount: &#8377;<%= amount %>
         </div>
 
         <div class="buttons">
