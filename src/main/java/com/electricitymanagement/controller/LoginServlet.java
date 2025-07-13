@@ -38,14 +38,15 @@ public class LoginServlet extends HttpServlet {
             else {
             	System.out.println("User is active");
             	req.getSession().setAttribute("user", user); 
+            	req.getSession().setAttribute("username", user.getName());
             	
             	if (user.getRole().equalsIgnoreCase("Admin")) {
             	    req.getSession().setAttribute("role", "admin"); 
-            	    res.sendRedirect("addBill.jsp"); 
+            	    res.sendRedirect("adminHome.jsp"); 
             	} 
             	else {
             	    req.getSession().setAttribute("role", "user");
-            	    res.sendRedirect("view-bills"); 
+            	    res.sendRedirect("home.jsp"); 
             	}
             }
 

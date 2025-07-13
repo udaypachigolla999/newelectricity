@@ -106,14 +106,14 @@ public class UserDao {
     	System.out.println("Getting connection for login");
         Connection con = getConnection();
 
-        PreparedStatement stmt = con.prepareStatement("SELECT l.*,c.status FROM login l left join customer c on l.customerId=c.customerId WHERE l.email=? AND password=?");
+        PreparedStatement stmt = con.prepareStatement("SELECT l.*,c.status,c.name FROM login l left join customer c on l.customerId=c.customerId WHERE l.email=? AND password=?");
         stmt.setString(1, email);
         stmt.setString(2, password);
         ResultSet rs = stmt.executeQuery();
 
         
         if (rs.next()) {
-        	Users user=new Users(rs.getString("customerid"), rs.getInt("id"), rs.getString("email"), rs.getString("userName"), rs.getString("role"), rs.getString("status"));
+        	Users user=new Users(rs.getString("customerid"), rs.getInt("id"), rs.getString("email"), rs.getString("userName"), rs.getString("role"), rs.getString("status"),rs.getString("name"));
         	
             return user;
         } else {

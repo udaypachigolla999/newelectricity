@@ -37,7 +37,7 @@ public class AddBillServlet extends HttpServlet {
             	PrintWriter out = response.getWriter();
             	out.println("<script type='text/javascript'>");
             	out.println("alert('Bill added successfully! Redirecting to view bills page...');");
-            	out.println("window.location.href = 'addBill.jsp';");
+            	out.println("window.location.href = 'view-billsHistory';");
             	out.println("</script>");
             	
             } else {

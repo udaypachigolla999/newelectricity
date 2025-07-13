@@ -147,7 +147,7 @@
     }
 
     function handlePayment(event) {
-        
+        event.preventDefault(); 
 
         const cardNum = document.getElementById('card-number').value.replace(/\s/g, '');
         const expiry = document.getElementById('expiry').value;
@@ -158,26 +158,27 @@
 
         if (cardNum.length !== 16 || !/^\d+$/.test(cardNum)) {
             alert("Please enter a valid 16-digit card number.");
-            return;
+            return false;
         }
 
         if (!expiryPattern.test(expiry)) {
             alert("Please enter a valid expiry date in MM/YY format.");
-            return;
+            return false;
         }
 
         if (!/^\d{3,4}$/.test(cvv)) {
             alert("Please enter a valid 3 or 4 digit CVV.");
-            return;
+            return false;
         }
 
         if (holder.length < 2) {
             alert("Please enter a valid cardholder name.");
-            return;
+            return false;
         }
 
         alert("Payment Successful! Thank you.");
-       return true;
+        event.target.submit(); 
+        return true;
     }
 
     document.getElementById('card-number').addEventListener('input', function (e) {

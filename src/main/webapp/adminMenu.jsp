@@ -1,132 +1,197 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <style>
-body{
-margin: 0;}
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
 .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #1f3a93;
-            padding: 10px 20px;
-            color: white;
-        }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f3a93;
+  padding: 10px 30px;
+  color: white;
+  position: relative;
+}
 
-        .nav-left, .nav-right {
-            display: flex;
-            align-items: center;
-        }
+.nav-brand {
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-        .nav-left .dropdown {
-            position: relative;
-            margin-right: 20px;
-        }
+.nav-brand .material-icons {
+  font-size: 24px;
+  color: #ffcc00;
+}
 
-        .dropdown button {
-            background-color: transparent;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex; 
-		    align-items: center;
-		    gap: 4px; 
-		        }
+/* Center nav items */
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+}
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            color: black;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 4px;
-        }
+.dropdown {
+  position: relative;
+}
 
-        .dropdown-content a {
-    padding: 12px 18px;
-    text-decoration: none;
-    display: block;
-    color: #333;
-    font-size: 15px;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
+.dropdown button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 40px;
+  background-color: white;
+  color: black;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  padding: 12px 18px;
+  display: block;
+  font-size: 15px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  background: white;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .dropdown-content a:hover {
-    background-color: #e6f0ff;
-    color: #1f3a93;
+  background-color: #e6f0ff;
+  color: #1f3a93;
 }
 
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .nav-right span {
-            margin-right: 15px;
-            font-weight: bold;
-        }
-
-        .logout-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .arrow {
-    margin-left: 6px;
-    font-size: 12px;
+.dropdown:hover .dropdown-content {
+  display: block;
 }
-        
+
+/* Profile dropdown: separate class, same style */
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-content {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  color: black;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.profile-content form,
+.profile-content button {
+  padding: 12px 18px;
+  font-size: 15px;
+  color: #333;
+  background: white;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.profile-content button:hover {
+  background-color: #e6f0ff;
+  color: #1f3a93;
+}
+
+.profile-dropdown:hover .profile-content {
+  display: block;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 </style>
-</head>
-<body>
-<div class="navbar">
-    <div class="nav-left">
-        <div class="dropdown">
-            <button>Bills <span class="arrow">▼</span></button>
-            <div class="dropdown-content">
-                <a href="view-billsHistory">View All Bills</a>
-                <a href="addBill.jsp">Add New Bill</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button>Customers  <span class="arrow">▼</span></button>
-            <div class="dropdown-content">
-                <a href="ViewAllCustomers">View All Customers</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button>Complaints  <span class="arrow">▼</span></button>
-            <div class="dropdown-content">
-                <a href="viewAllComplaintsServlet">View All Complaints</a>
-                <%-- Add other complaint related admin actions here, e.g., "Resolve Complaint" --%>
-            </div>
-        </div>
-        <%-- Potentially add more admin-specific dropdowns here --%>
-    </div>
-    <div class="nav-right">
-        <span>
-            <%
-                String username = (String) session.getAttribute("username");
-                out.print(username != null ? username : "admin");
-            %>
-        </span>
-        <form method="post" action="LogoutServlet" style="margin: 0;">
-            <button class="logout-btn" type="submit">Logout</button>
-        </form>
-    </div>
-</div>
 
-</body>
-</html>
+<div class="navbar">
+  <!-- Brand -->
+  <div class="nav-brand">
+    <span class="material-icons">bolt</span>
+    <span>Electricity Management System</span>
+  </div>
+
+  <!-- Center Navigation -->
+  <div class="nav-center">
+    <div class="dropdown">
+      <button>Bills <span class="material-icons" style="font-size: 16px;">expand_more</span></button>
+      <div class="dropdown-content">
+        <a href="view-billsHistory">View All Bills</a>
+        <a href="addBill.jsp">Add New Bill</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button>Customers <span class="material-icons" style="font-size: 16px;">expand_more</span></button>
+      <div class="dropdown-content">
+        <a href="ViewAllCustomers">View All Customers</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button>Complaints <span class="material-icons" style="font-size: 16px;">expand_more</span></button>
+      <div class="dropdown-content">
+        <a href="viewAllComplaintsServlet">View All Complaints</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-right">
+    <div class="profile-dropdown">
+      <button class="profile-button">
+        Welcome,
+        <%
+          String username = (String) session.getAttribute("username");
+          out.print(username != null ? username : "Admin");
+        %>
+        <span class="material-icons">account_circle</span>
+      </button>
+      <div class="profile-content">
+        <form method="post" action="LogoutServlet">
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

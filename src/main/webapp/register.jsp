@@ -73,8 +73,8 @@
 <body>
   <div class="form-container">
     <h2>Customer Registration</h2>
-    <form action="register" method="post">
-      <label for="consumerId">Consumer ID</label>
+    <form action="register" method="post" onsubmit="return validateForm()">
+      <label for="consumerId">Consumer Number</label>
       <input type="text" id="consumerId" name="custid" required>
 
       <label for="customerName">Customer Name</label>
@@ -89,15 +89,65 @@
       <label for="address">Address</label>
       <input type="text" id="address" name="address" required>
 
-     <!--<label for="userId">User ID</label>
-      <input type="text" id="userId" name="userId" required>  --> 
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
+		<label for="password">Password</label>
+		<input type="password" id="password" name="password" required>
+		
+		<!-- 🔹 Trigger for the popup -->
+		<p style="margin: 5px 0;">
+		  <a href="#" onclick="togglePolicy(event)" style="font-size: 12px; color: #0275d8; text-decoration: underline;">View password policy</a>
+		</p>
+		
+		<!-- 🔹 Password policy popup box -->
+		<div id="policyPopup" style="display: none; background-color: #f0f8ff; padding: 10px; border: 1px solid #0275d8; border-radius: 5px; font-size: 13px; color: #333;">
+		  <strong>Password must:</strong>
+		  <ul style="padding-left: 18px; margin: 5px 0;">
+		    <li>Be 8–20 characters long</li>
+		    <li>Contain at least 1 uppercase letter</li>
+		    <li>Contain at least 1 lowercase letter</li>
+		    <li>Contain at least 1 digit</li>
+		    <li>Contain at least 1 special character (@, #, $, etc.)</li>
+		  </ul>
+		</div>
 
+<!-- 🔴 Error message -->
+<small id="passwordError" style="color: red; display: none;">
+  <span style="font-weight: bold; font-size: 16px; vertical-align: middle;">&#9432;</span>
+  Password doesn't meet the required criteria.
+</small>
+
+
+		
    
       <button type="submit">Register</button>
+      <p style="text-align: center; margin-top: 15px;">
+	  Already have an account? 
+	  <a href="login.jsp" style="color: #0275d8; text-decoration: none;">Login</a>
+</p>
     </form>
   </div>
 </body>
 </html>
+
+<script>
+  function togglePolicy(event) {
+    event.preventDefault(); // prevent link reload
+    const popup = document.getElementById("policyPopup");
+    popup.style.display = popup.style.display === "none" ? "block" : "none";
+  }
+
+  function validateForm() {
+    const password = document.getElementById("password").value;
+    const errorMsg = document.getElementById("passwordError");
+
+    const regex = /^(?=(?:.*[A-Z]){1,})(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!_\-]).{8,20}$/;
+
+    if (!regex.test(password)) {
+      errorMsg.style.display = "block";
+      return false;
+    } else {
+      errorMsg.style.display = "none";
+      return true;
+    }
+  }
+</script>

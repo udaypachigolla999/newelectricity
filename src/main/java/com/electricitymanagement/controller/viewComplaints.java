@@ -1,6 +1,7 @@
 package com.electricitymanagement.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,26 +24,41 @@ public class viewComplaints extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		System.out.println("Complaint SERVLET");
-		
-		Users user = (Users) request.getSession().getAttribute("user");
+	    System.out.println("Complaint SERVLET");
 
-        if (user == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
+	    Users user = (Users) request.getSession().getAttribute("user");
 
-        try {
-            String customerId = user.getCustomerId(); // adjust this based on your Users model
-            List<Complaint> comps = ComplaintDao.getComplaintsByCustomerId(customerId);
-            request.setAttribute("complaints", comps);
-            request.getRequestDispatcher("viewComplaints.jsp").forward(request, response);
+	    if (user == null) {
+	        response.sendRedirect("login.jsp");
+	        return;
+	    }
 
-        } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
+	    String complaintIdParam = request.getParameter("complaintId");
+
+	    try {
+	        List<Complaint> comps;
+
+	        if (complaintIdParam != null && !complaintIdParam.trim().isEmpty()) {
+	            int complaintId = Integer.parseInt(complaintIdParam);
+	            Complaint c = ComplaintDao.getComplaintById(complaintId);
+	            comps = new ArrayList<>();
+	            if (c != null && c.getCustomerId().equals(user.getCustomerId())) {
+	                comps.add(c);
+	            }
+	        } else {
+	            String customerId = user.getCustomerId();
+	            comps = ComplaintDao.getComplaintsByCustomerId(customerId);
+	        }
+
+	        request.setAttribute("complaints", comps);
+	        request.getRequestDispatcher("viewComplaints.jsp").forward(request, response);
+
+	    } catch (Exception e) {
+	        request.setAttribute("error", e.getMessage());
+	        request.getRequestDispatcher("error.jsp").forward(request, response);
+	    }
 	}
+
 
 
 }

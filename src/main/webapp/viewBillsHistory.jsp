@@ -108,6 +108,16 @@
         from { opacity: 0; }
         to { opacity: 1; }
     }
+     .status-success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            color: red;
+            font-weight: bold;
+        }
+   
     </style>
     <script>
         function showDetails(bill) {
@@ -139,22 +149,27 @@
             <tr>
                 <th>Payment Id</th>
                 <th>Amount</th>
+                <!-- <th>Payment Date</th>
+                <th>Payment Time</th> -->
                 <th>Status</th>
-                <th>Payment Date</th>
-                <th>Payment Time</th>
-                <th>View Details</th> <!-- New column -->
+                <th>View Details</th> 
             </tr>
             <%
                 for (Bill bill : bills) {
                     if (bill.getStatus().equalsIgnoreCase("success")) {
                         hasPaidBills = true;
+                        String status = bill.getStatus();
+                        String statusClass = "status-pending";
+                        if ("Success".equalsIgnoreCase(status)) {
+                            statusClass = "status-success";
+                        }
             %>
             <tr>
                 <td><%= bill.getPaymentId() %></td>
                 <td>&#8377;<%= bill.getAmount() %></td>
-                <td><%= bill.getStatus() %></td>
-                <td><%= bill.getPaymentDate() %></td>
-                <td><%= bill.getPaymentTime() %></td>
+                <%-- <td><%= bill.getPaymentDate() %></td>
+                <td><%= bill.getPaymentTime() %></td> --%>
+                <td class="<%= statusClass %>"><%= status %></td>
                 <td>
                     <a href="javascript:void(0);" 
                        onclick="showDetails('Payment ID: <%= bill.getPaymentId() %><br>Amount: &#8377;<%= bill.getAmount() %><br>Status: <%= bill.getStatus() %><br>Payment Date: <%= bill.getPaymentDate() %><br>Payment Time: <%= bill.getPaymentTime() %>');">
@@ -185,4 +200,4 @@
     </div>
 </div>
     </body>
-    </html>
+    </html>

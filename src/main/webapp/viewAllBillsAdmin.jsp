@@ -115,7 +115,7 @@
             <table>
                 <tr>
                     <th>Bill ID</th>
-                    <th>Customer ID</th> 
+                    <th>Consumer Number</th> 
                     <th>Payment Id</th>
                     <th>Amount</th>
                     <th>Status</th>
@@ -130,7 +130,9 @@
                     <td><%= bill.getCustomerId() %></td> 
                     <td><%= bill.getPaymentId() %></td>
                     <td>&#8377;<%= bill.getAmount() %></td>
-                    <td><%= bill.getStatus() %></td>
+                    <td style="color: <%= bill.getStatus().equalsIgnoreCase("Pending") ? "red" : "green" %>;">
+					    <%= bill.getStatus() %>
+					</td>
                     <td><%= bill.getPaymentDate() %></td>
                     <td><%= bill.getPaymentTime() %></td>
                 </tr>

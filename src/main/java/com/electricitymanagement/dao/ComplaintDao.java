@@ -115,7 +115,38 @@ public class ComplaintDao
 			    } catch (SQLException e) {
 			        throw new Exception("Failed to update complaint status: " + e.getMessage());
 			    }
-			}
+		}
+		
+	
+
+
+			public static Complaint getComplaintById(int complaintId) throws Exception {
+					    DbUtility dbutil = new DbUtility();
+					    Complaint complaint = null;
+
+					    try (Connection con = dbutil.createConnection()) {
+					        PreparedStatement ps = con.prepareStatement("SELECT * FROM complaint WHERE complaintId = ?");
+					        ps.setInt(1, complaintId);
+					        ResultSet rs = ps.executeQuery();
+
+					        if (rs.next()) {
+					            complaint = new Complaint(
+					                rs.getInt("complaintId"),
+					                rs.getString("customerId"),
+					                rs.getString("complaintType"),
+					                rs.getString("description"),
+					                rs.getString("status")
+					            );
+					        }
+
+					    } catch (SQLException e) {
+					        e.printStackTrace();
+					        throw new Exception("Error fetching complaint: " + e.getMessage());
+					    }
+
+					    return complaint;
+					}
+		
 	
 	
-               }
+   }

@@ -70,6 +70,16 @@
             font-size: 16px;
             color: #555;
         }
+         .status-success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            color: red;
+            font-weight: bold;
+        }
+        
     </style>
 </head>
 <body>
@@ -98,11 +108,16 @@
                 </tr>
                 <%
                     for (Bill bill : bills) {
+                    	String status = bill.getStatus();
+                        String statusClass = "status-pending";
+                        if ("Success".equalsIgnoreCase(status)) {
+                            statusClass = "status-success";
+                        }
                 %>
                 <tr>
                     <td><%= bill.getBillId() %></td>
                     <td>&#8377;<%= bill.getAmount() %></td>
-                    <td><%= bill.getStatus() %></td>
+                    <td class="<%= statusClass %>"><%= status %></td>
                     <td>
                         <form method="post" action="payBills.jsp">
                             <input type="hidden" name="billId" value="<%= bill.getBillId() %>" />

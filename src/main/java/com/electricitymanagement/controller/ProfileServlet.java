@@ -70,6 +70,6 @@ public class ProfileServlet extends HttpServlet {
 		}
 
         // Redirect to the profile page after updating
-        res.sendRedirect("view-bills");
+        res.sendRedirect("home.jsp");
     }
 }

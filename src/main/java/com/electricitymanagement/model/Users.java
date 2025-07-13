@@ -10,6 +10,8 @@ public class Users
 	private String role;
 	
 	private String status;
+	private String name;
+	
 	
 	public Users() {
 		
@@ -32,7 +34,7 @@ public class Users
 		
 		this.role = role;
 	}
-	public Users(String customerId,int id, String email, String userName, String role, String status) {
+	public Users(String customerId,int id, String email, String userName, String role, String status,String name) {
 		
 		this.id = id;
 		this.customerId = customerId;
@@ -41,7 +43,9 @@ public class Users
 		this.role = role;
 		
 		this.status=status;
+		this.name=name;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -87,6 +91,14 @@ public class Users
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 	
 	
 	

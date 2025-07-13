@@ -282,37 +282,38 @@
   }
 
   function handlePayment(event) {
-    event.preventDefault();
+      event.preventDefault(); 
 
-    const cardNum = document.getElementById('card-number').value.replace(/\s/g, '');
-    const expiry = document.getElementById('expiry').value;
-    const cvv = document.getElementById('cvv').value;
-    const holder = document.getElementById('cardholder').value.trim();
+      const cardNum = document.getElementById('card-number').value.replace(/\s/g, '');
+      const expiry = document.getElementById('expiry').value;
+      const cvv = document.getElementById('cvv').value;
+      const holder = document.getElementById('cardholder').value.trim();
 
-    const expiryPattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
+      const expiryPattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
 
-    if (cardNum.length !== 16 || !/^\d+$/.test(cardNum)) {
-      alert("Please enter a valid 16-digit card number.");
-      return;
-    }
+      if (cardNum.length !== 16 || !/^\d+$/.test(cardNum)) {
+          alert("Please enter a valid 16-digit card number.");
+          return false;
+      }
 
-    if (!expiryPattern.test(expiry)) {
-      alert("Please enter a valid expiry date in MM/YY format.");
-      return;
-    }
+      if (!expiryPattern.test(expiry)) {
+          alert("Please enter a valid expiry date in MM/YY format.");
+          return false;
+      }
 
-    if (!/^\d{3,4}$/.test(cvv)) {
-      alert("Please enter a valid 3 or 4 digit CVV.");
-      return;
-    }
+      if (!/^\d{3,4}$/.test(cvv)) {
+          alert("Please enter a valid 3 or 4 digit CVV.");
+          return false;
+      }
 
-    if (holder.length < 2) {
-      alert("Please enter a valid cardholder name.");
-      return;
-    }
+      if (holder.length < 2) {
+          alert("Please enter a valid cardholder name.");
+          return false;
+      }
 
-    alert("Payment Successful! Thank you.");
-    window.location.href = "home.html";
+      alert("Payment Successful! Thank you.");
+      event.target.submit(); 
+      return true;
   }
 
   document.getElementById('card-number').addEventListener('input', function (e) {
