@@ -71,24 +71,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content:Â center;
+}
+.header h1 {
+    color: #0275d8;
+    margin-bottom: 5px;
+}
+
+.header p {
+    margin-top: 0;
+    color: #555;
 }
         
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- 🔹 Header Section (copied from login page) -->
-    <div class="header" style="text-align:center; margin-bottom: 20px;">
-        <h1 style="color: #0275d8; margin-bottom: 5px;">Electricity Bill Management</h1>
-        <p style="margin-top: 0; color: #555;">Manage your bills, payments and complaints efficiently</p>
-    </div>
+    <!-- ð¹ Header Section (copied from login page) -->
+   <div class="header">
+            <h1>Electricity Bill Management</h1>
+            <p>Manage your bills, payments and complaints efficiently</p>
+        </div>
   <div class="form-container">
   <%
 		    String msg2 = (String) session.getAttribute("msg2");
 		    if (msg2 != null) {
 		%>
-		    <p style="color: red;"><%= msg2 %></p>
+		    <p style="color: red; text-align: center;"><%= msg2 %></p>
 		<%
 		        session.removeAttribute("msg2"); 
 		    }
@@ -96,34 +105,34 @@
     <h2>Customer Registration</h2>
     <form action="register" method="post" onsubmit="return validateForm()">
       <label for="consumerId">Consumer Number</label>
-      <input type="text" id="consumerId" name="custid" required>
+      <input type="text" id="consumerId" name="custid" placeholder="Enter your Consumer Number" required>
 
       <label for="customerName">Customer Name</label>
-      <input type="text" id="customerName" name="name" required>
+      <input type="text" id="customerName" name="name" placeholder="Enter your Name" required>
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" placeholder="Enter your Email" required>
 
       <label for="mobile">Mobile Number</label>
-      <input type="text" id="mobile" name="mobile" maxlength="10" pattern="\d{10}" required>
+      <input type="text" id="mobile" name="mobile" maxlength="10" pattern="\d{10}" placeholder="Enter your Mobile Number" required>
       
       <label for="address">Address</label>
-      <input type="text" id="address" name="address" required>
+      <input type="text" id="address" name="address" placeholder="Enter your Address" required>
 
 
 		<label for="password">Password</label>
-		<input type="password" id="password" name="password" required>
+		<input type="password" id="password" name="password" placeholder="Enter your Password" required>
 		
-		<!-- 🔹 Trigger for the popup -->
+		<!-- ð¹ Trigger for the popup -->
 		<p style="margin: 5px 0;">
 		  <a href="#" onclick="togglePolicy(event)" style="font-size: 12px; color: #0275d8; text-decoration: underline;">View password policy</a>
 		</p>
 		
-		<!-- 🔹 Password policy popup box -->
+		<!-- ð¹ Password policy popup box -->
 		<div id="policyPopup" style="display: none; background-color: #f0f8ff; padding: 10px; border: 1px solid #0275d8; border-radius: 5px; font-size: 13px; color: #333;">
 		  <strong>Password must:</strong>
 		  <ul style="padding-left: 18px; margin: 5px 0;">
-		    <li>Be 8–20 characters long</li>
+		    <li>Be 8â20 characters long</li>
 		    <li>Contain at least 1 uppercase letter</li>
 		    <li>Contain at least 1 lowercase letter</li>
 		    <li>Contain at least 1 digit</li>
@@ -131,7 +140,7 @@
 		  </ul>
 		</div>
 
-<!-- 🔴 Error message -->
+<!-- ð´ Error message -->
 <small id="passwordError" style="color: red; display: none;">
   <span style="font-weight: bold; font-size: 16px; vertical-align: middle;">&#9432;</span>
   Password doesn't meet the required criteria.

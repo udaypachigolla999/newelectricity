@@ -100,8 +100,8 @@ body, html {
 		%>
             <h2>Login to your Account</h2>
             <form method="post" action="login">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <input type="password" name="password" placeholder="Enter your password" required>
+                <input type="email" name="email" placeholder="Enter your Email" required>
+                <input type="password" name="password" placeholder="Enter your Password" required>
                 <button type="submit">Login</button>
                 <p class="register-link">Not registered yet? <a href="register.jsp">Register</a></p>
                 <p class="register-link">Deactivated your account? <a href="restoreAccount.jsp">Restore Account</a></p> 

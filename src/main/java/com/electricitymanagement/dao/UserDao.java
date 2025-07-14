@@ -14,7 +14,7 @@ public class UserDao {
 		try
 		{
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-			con=DriverManager.getConnection("jdbc:derby:E:\\eclipse-workspace\\TCS Project\\ElectricityManage\\DB2;create=true");
+			con=DriverManager.getConnection("jdbc:derby:C:\\Users\\2784823\\Desktop\\My Space\\Eclipse Workspace\\ElectricityManage\\DB2;create=true");
 			
 			System.out.println("Db Created");
 		
@@ -131,9 +131,10 @@ public class UserDao {
     public static boolean customerExists(String customerId) throws Exception {
         DbUtility dbutil = new DbUtility();
         try (Connection con = dbutil.createConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT 1 FROM customer WHERE customerId = ?")) {
+             PreparedStatement ps = con.prepareStatement("SELECT 1 FROM customer WHERE customerId = ? and customerId not in(select customerid from login where role='admin' or role='Admin')")) {
             ps.setString(1, customerId);
             ResultSet rs = ps.executeQuery();
+            
             return rs.next(); // returns true if customer exists
         } catch (SQLException e) {
             e.printStackTrace();

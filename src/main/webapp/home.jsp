@@ -129,7 +129,7 @@
 
 <div class="hero-section">
   <h1>Welcome to Electricity Management System</h1>
-  <p>Manage your electricity bills, track your consumption, register complaints and stay updated with ease — all in one place.</p>
+  <p>Manage your electricity bills, track your consumption, register complaints and stay updated with ease - all in one place.</p>
   <div class="hero-buttons">
     <a href="view-bills">Pay Bills</a>
     <a href="registerComplaint.jsp">Register Complaint</a>

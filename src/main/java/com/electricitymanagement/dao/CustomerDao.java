@@ -18,7 +18,7 @@ public class CustomerDao {
 		System.out.println("Inside Customer");
         try {
             Connection con = dbutil.createConnection(); 
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM customer");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM customer where customerid not in(select customerid from login where role='admin' or role='Admin')");
             ResultSet rs = ps.executeQuery();
             System.out.println("Inside All customers final");
             while (rs.next()) {
@@ -43,7 +43,7 @@ public class CustomerDao {
 		System.out.println("Inside Customer");
         try {
             Connection con = dbutil.createConnection(); 
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM customer WHERE customerId = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM customer WHERE customerId = ? and customerId not in (select customerid from login where role='admin' or role='Admin')");
             ps.setString(1, customerId);
             ResultSet rs = ps.executeQuery();
             System.out.println("Inside customer final");

@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebServlet("/DeactivateAccountServlet")
 public class DeactivateAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    	
+    	System.out.println("\n Deactivatin \n");
     	 HttpSession session = req.getSession(false);
          if (session == null || session.getAttribute("user") == null) {
              res.sendRedirect("login.jsp");

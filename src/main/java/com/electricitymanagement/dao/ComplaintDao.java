@@ -53,7 +53,7 @@ public class ComplaintDao
 		System.out.println("Inside Complaint");
         try {
             Connection con = dbutil.createConnection(); // use your existing method
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM complaint WHERE customerId = ? order by complaintId desc");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM complaint WHERE customerId = ? and customerId not in (select customerid from login where role='admin' or role='Admin') order by complaintId desc");
             ps.setString(1, customerId);
             ResultSet rs = ps.executeQuery();
             System.out.println("Inside Complaint final");
