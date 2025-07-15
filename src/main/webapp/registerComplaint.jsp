@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,10 +33,10 @@
             <div class="form-group">
                 <label for="status">Complaint Type</label>
                 <select class="form-control" id="status" name="complaint-type" required>
-                    <option value="powersupply">Power Supply</option>
-                    <option value="billing">Billing Issues</option>
-                    <option value="meter">Meter Issues</option>
-                    <option value="other">Others</option>
+                    <option value="Power supply">Power Supply</option>
+                    <option value="Billing">Billing Issues</option>
+                    <option value="Meter">Meter Issues</option>
+                    <option value="Others">Others</option>
                 </select>
             </div>
             <div class="form-group">

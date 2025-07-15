@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +68,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:Â center;
+    justify-content:�center;
 }
 .header h1 {
     color: #0275d8;
@@ -87,7 +84,7 @@
 </head>
 <body>
 <div class="container">
-    <!-- ð¹ Header Section (copied from login page) -->
+    <!--  Header Section (copied from login page) -->
    <div class="header">
             <h1>Electricity Bill Management</h1>
             <p>Manage your bills, payments and complaints efficiently</p>
@@ -123,16 +120,25 @@
 		<label for="password">Password</label>
 		<input type="password" id="password" name="password" placeholder="Enter your Password" required>
 		
-		<!-- ð¹ Trigger for the popup -->
+		
+		<label for="confirmPassword">Confirm Password</label>
+		<input type="password" id="confirmPassword" name="confirmPassword" required>
+		
+		<small id="confirmPasswordError" style="color: red; display: none;">
+	 <span style="font-weight: bold; font-size: 16px; vertical-align: middle;">&#9432;</span>
+		 Passwords do not match.
+		</small>
+		
+		<!--  Trigger for the popup -->
 		<p style="margin: 5px 0;">
 		  <a href="#" onclick="togglePolicy(event)" style="font-size: 12px; color: #0275d8; text-decoration: underline;">View password policy</a>
 		</p>
 		
-		<!-- ð¹ Password policy popup box -->
+		<!-- 🔹 Password policy popup box -->
 		<div id="policyPopup" style="display: none; background-color: #f0f8ff; padding: 10px; border: 1px solid #0275d8; border-radius: 5px; font-size: 13px; color: #333;">
 		  <strong>Password must:</strong>
 		  <ul style="padding-left: 18px; margin: 5px 0;">
-		    <li>Be 8â20 characters long</li>
+		    <li>Be 8-20 characters long</li>
 		    <li>Contain at least 1 uppercase letter</li>
 		    <li>Contain at least 1 lowercase letter</li>
 		    <li>Contain at least 1 digit</li>
@@ -140,7 +146,7 @@
 		  </ul>
 		</div>
 
-<!-- ð´ Error message -->
+<!-- 🔴 Error message -->
 <small id="passwordError" style="color: red; display: none;">
   <span style="font-weight: bold; font-size: 16px; vertical-align: middle;">&#9432;</span>
   Password doesn't meet the required criteria.
@@ -150,6 +156,11 @@
 		
    
       <button type="submit">Register</button>
+      
+       
+      <p style="margin-top: 10px; text-align: center;">
+    <a href="login.jsp" style="color: #0275d8; text-decoration: underline; font-size: 14px;">Account already exists? Go to Login</a>
+</p>
     </form>
   </div>
   </div>
@@ -166,15 +177,41 @@
   function validateForm() {
     const password = document.getElementById("password").value;
     const errorMsg = document.getElementById("passwordError");
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const passwordError = document.getElementById("passwordError");
+    const confirmPasswordError = document.getElementById("confirmPasswordError");
 
     const regex = /^(?=(?:.*[A-Z]){1,})(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!_\-]).{8,20}$/;
+    
+    let isValid = true;
 
-    if (!regex.test(password)) {
-      errorMsg.style.display = "block";
-      return false;
-    } else {
-      errorMsg.style.display = "none";
-      return true;
-    }
+	if (!regex.test(password)) {
+		passwordError.style.display = "block";
+		confirmPasswordError.style.display = "none"; 
+		isValid = false;
+	} 
+	else 
+	{
+		passwordError.style.display = "none";
+	
+		if (password !== confirmPassword) 
+		{
+			confirmPasswordError.style.display = "block";
+			isValid = false;
+		} 
+		else 
+		{
+			confirmPasswordError.style.display = "none";
+		}
+	}
+
+ return isValid;
   }
+  document.getElementById("password").addEventListener("focus", function () {
+	  � document.getElementById("passwordError").style.display = "none";
+	  });
+
+	  document.getElementById("confirmPassword").addEventListener("focus", function () {
+	   document.getElementById("confirmPasswordError").style.display = "none";
+	  });
 </script>

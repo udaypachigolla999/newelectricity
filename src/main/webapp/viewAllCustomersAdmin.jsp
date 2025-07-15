@@ -163,15 +163,18 @@
                 <td class="<%= isActive ? "status-active" : "status-inactive" %>">
                     <%= customer.getStatus() %>
                 </td>
+                
                 <td>
-                    <form action="UpdateCustomerStatusAdmin" method="post">
-                        <input type="hidden" name="customerId" value="<%= customer.getCustomerId() %>">
-                        <input type="hidden" name="newStatus" value="<%= isActive ? "inactive" : "active" %>">
-                        <input type="submit"
-                               class="btn <%= isActive ? "btn-inactive" : "btn-active" %>"
-                               value="Set <%= isActive ? "Inactive" : "Active" %>">
-                    </form>
-                </td>
+				    <form action="UpdateCustomerStatusAdmin" method="post" id="statusForm<%= customer.getCustomerId() %>">
+				        <input type="hidden" name="customerId" value="<%= customer.getCustomerId() %>">
+				        <input type="hidden" name="newStatus" value="<%= isActive ? "Inactive" : "Active" %>">
+				        <input type="button"
+				               class="btn <%= isActive ? "btn-inactive" : "btn-active" %>"
+				               value="Set <%= isActive ? "Inactive" : "Active" %>"
+				               onclick="confirmStatusChange('Do you want to change the status?', this.form)">
+				    </form>
+				</td>
+             
             </tr>
             <%
                 }
@@ -183,3 +186,11 @@
 </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    function confirmStatusChange(message, form) {
+        if (confirm(message)) {
+            form.submit();
+        }
+    }
+</script>

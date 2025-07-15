@@ -25,7 +25,13 @@ public class AddBillServlet extends HttpServlet {
             }
 
             double amount = Double.parseDouble(amountStr);
-
+            
+            if(amount<=0) {
+            	request.setAttribute("error", "Please enter a valid amount.");
+                request.getRequestDispatcher("addBill.jsp").forward(request, response);
+                return;
+            }
+            
             // Create bill with status Pending
             Bill bill = new Bill(customerId, amount, "Pending", null, null, null);
 
@@ -52,6 +58,3 @@ public class AddBillServlet extends HttpServlet {
         }
     }
   }
-            
-            
-         

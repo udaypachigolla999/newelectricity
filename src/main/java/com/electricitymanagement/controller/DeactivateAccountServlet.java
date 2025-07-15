@@ -27,7 +27,7 @@ public class DeactivateAccountServlet extends HttpServlet {
             if (customerId != null) {
             	try
             	{
-            		CustomerDao.updateCustomerStatus(customerId,"inactive");
+            		CustomerDao.updateCustomerStatus(customerId,"Inactive");
             	}
             	catch(Exception e)
             	{

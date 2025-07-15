@@ -29,6 +29,7 @@ select * from complaint;
 drop table customer;
 drop table login;
 drop table bill;
+drop table complaint;
 
 INSERT INTO bill(customerId,amount,status,paymentId,paymentDate,paymentTime) VALUES ('121', 2000, 'Pending', 'Empty',NULL,NULL);
 

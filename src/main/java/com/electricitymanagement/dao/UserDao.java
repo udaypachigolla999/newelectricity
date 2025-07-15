@@ -14,7 +14,7 @@ public class UserDao {
 		try
 		{
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-			con=DriverManager.getConnection("jdbc:derby:C:\\Users\\2784823\\Desktop\\My Space\\Eclipse Workspace\\ElectricityManage\\DB2;create=true");
+			con=DriverManager.getConnection("jdbc:derby:E:\\eclipse-workspace\\TCS Project\\ElectricityManage\\DB2;create=true");
 			
 			System.out.println("Db Created");
 		
@@ -176,7 +176,7 @@ public class UserDao {
 	        DbUtility dbutil = new DbUtility();
 	        try {
 	        	Connection connection = dbutil.createConnection();
-	            String query = "UPDATE customer SET status = 'active' WHERE email = ? AND status = 'inactive'";
+	            String query = "UPDATE customer SET status = 'Active' WHERE email = ? AND status = 'Inactive'";
 	            PreparedStatement statement = connection.prepareStatement(query);
 	            statement.setString(1, email);
 	            int rowsUpdated = statement.executeUpdate();

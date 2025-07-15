@@ -73,7 +73,7 @@ public class BillDao
 		LocalTime currentTime = LocalTime.now();
 	    try {
 	        Connection con = dbutil.createConnection();
-	        PreparedStatement ps = con.prepareStatement("UPDATE bill SET status = 'Success', paymentDate = ?, paymentTime = ?, paymentId = ? WHERE billId = ?");
+	        PreparedStatement ps = con.prepareStatement("UPDATE bill SET status = 'Paid', paymentDate = ?, paymentTime = ?, paymentId = ? WHERE billId = ?");
 	        ps.setDate(1,Date.valueOf(currentDate));
 	        ps.setTime(2,Time.valueOf(currentTime));
 	        ps.setString(3,"PAY" + UUID.randomUUID().toString().replace("-", "").substring(0, 10).toUpperCase());
@@ -136,5 +136,4 @@ public class BillDao
 	
 	
 
-              }
-
+}

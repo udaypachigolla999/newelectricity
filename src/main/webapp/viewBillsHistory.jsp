@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="java.util.List" %>
+  <%@ page import="java.util.List" %>
 <%@ page import="com.electricitymanagement.model.Bill" %>
 <%@ page import="com.electricitymanagement.model.Users" %>
 <%@ page session="true" %>
@@ -156,11 +156,11 @@
             </tr>
             <%
                 for (Bill bill : bills) {
-                    if (bill.getStatus().equalsIgnoreCase("success")) {
+                    if (bill.getStatus().equalsIgnoreCase("Paid")) {
                         hasPaidBills = true;
                         String status = bill.getStatus();
                         String statusClass = "status-pending";
-                        if ("Success".equalsIgnoreCase(status)) {
+                        if ("Paid".equalsIgnoreCase(status)) {
                             statusClass = "status-success";
                         }
             %>

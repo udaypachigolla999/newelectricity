@@ -175,7 +175,18 @@
             alert("Please enter a valid cardholder name.");
             return false;
         }
+        const [expMonth, expYear] = expiry.split('/');
+        const inputMonth = parseInt(expMonth, 10);
+        const inputYear = parseInt('20' + expYear, 10);
+    
+    	const today = new Date();
+        const currentMonth = today.getMonth() + 1; 
+        const currentYear = today.getFullYear();
 
+        if (inputYear < currentYear || (inputYear === currentYear && inputMonth < currentMonth)) {
+            alert("The card is expired. Please use a valid card.");
+            return false;
+        }
         alert("Payment Successful! Thank you.");
         event.target.submit(); 
         return true;

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ page import="java.util.List" %>
 <%@ page import="com.electricitymanagement.model.Bill" %>
 <%@ page import="com.electricitymanagement.model.Users" %>
@@ -144,17 +143,17 @@
                     <td><%= bill.getPaymentTime() %></td> --%>
                     <td>
 					    <a href="javascript:void(0);" 
-					       onclick="showDetails(
-					           'Bill ID: <%= bill.getBillId() %><br>' +
-					           'Customer No: <%= bill.getCustomerId() %><br>' +
-					           'Payment ID: <%= bill.getPaymentId() %><br>' +
-					           'Amount: &#8377;<%= bill.getAmount() %><br>' +
-					           'Status: <%= bill.getStatus() %><br>' +
-					           'Payment Date: <%= bill.getPaymentDate() %><br>' +
-					           'Payment Time: <%= bill.getPaymentTime() %>'
-					       );">
-					       View Details
-    					</a>
+					       onclick="showDetails('<%= 
+					           "Bill ID: " + bill.getBillId() + "<br>" +
+					           "Consumer No: " + bill.getCustomerId() + "<br>" +
+					           (bill.getPaymentId() != null ? "Payment ID: " + bill.getPaymentId() + "<br>" : "") +
+					           "Amount: &#8377;" + bill.getAmount() + "<br>" +
+					           "Status: " + bill.getStatus() + "<br>" +
+					           (bill.getPaymentDate() != null ? "Payment Date: " + bill.getPaymentDate() + "<br>" : "") +
+					           (bill.getPaymentTime() != null ? "Payment Time: " + bill.getPaymentTime() : "")
+					       %>');">
+					        View Details
+					    </a>
 					</td>
                     
                 </tr>

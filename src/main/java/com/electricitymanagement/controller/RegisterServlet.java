@@ -44,12 +44,12 @@ public class RegisterServlet extends HttpServlet {
             } else if(success==1) {
             	System.out.println("ERROR");
             	req.getSession().setAttribute("msg2", "Email already exists!");
-                req.getRequestDispatcher("register.jsp").forward(req, res);
+                res.sendRedirect("register.jsp");
             }
             else if(success==2) {
             	System.out.println("ERROR");
             	req.getSession().setAttribute("msg2", "Consumer No. already exists!");
-                req.getRequestDispatcher("register.jsp").forward(req, res);
+            	res.sendRedirect("register.jsp");
             }
             
 

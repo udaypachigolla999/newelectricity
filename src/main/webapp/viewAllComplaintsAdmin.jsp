@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
 <%@ page import="java.util.List" %>
 <%@ page import="com.electricitymanagement.model.Complaint" %>
 <%@ page import="com.electricitymanagement.model.Users" %>
@@ -153,14 +152,18 @@
                     <td><%= c.getComplaintType() %></td>
                     <td><%= c.getDescription() %></td>
                     <td class="<%= statusClass %>"><%= c.getStatus() %></td>
+                    
                     <td>
-                        <form action="UpdateComplaintStatusServlet" method="post">
-                            <input type="hidden" name="complaintId" value="<%= c.getComplaintId() %>">
-                            <input type="hidden" name="newStatus" value="<%= "open".equalsIgnoreCase(c.getStatus()) ? "close" : "open" %>">
-                            <input type="submit" class="btn <%= "open".equalsIgnoreCase(c.getStatus()) ? "btn-close" : "btn-open" %>" 
-                                   value=" <%= "open".equalsIgnoreCase(c.getStatus()) ? "Close" : "Open" %>">
-                        </form>
-                    </td>
+					    <form action="UpdateComplaintStatusServlet" method="post">
+					        <input type="hidden" name="complaintId" value="<%= c.getComplaintId() %>">
+					        <input type="hidden" name="newStatus" value="<%= "open".equalsIgnoreCase(c.getStatus()) ? "Close" : "Open" %>">
+					        <input type="button"
+					               class="btn <%= "open".equalsIgnoreCase(c.getStatus()) ? "btn-close" : "btn-open" %>" 
+					               value="Set <%= "open".equalsIgnoreCase(c.getStatus()) ? "Close" : "Open" %>"
+					               onclick="confirmStatusChange('Do you want to change the status?', this.form)">
+					    </form>
+					</td>
+                    
                 </tr>
                 <% } %>
             </table>
@@ -168,3 +171,11 @@
     </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    function confirmStatusChange(message, form) {
+        if (confirm(message)) {
+            form.submit();
+        }
+    }
+</script>

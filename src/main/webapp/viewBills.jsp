@@ -109,8 +109,12 @@
                 <%
                     for (Bill bill : bills) {
                     	String status = bill.getStatus();
+                    	if(status.equalsIgnoreCase("Paid"))
+                    	{
+                    		continue;
+                    	}
                         String statusClass = "status-pending";
-                        if ("Success".equalsIgnoreCase(status)) {
+                        if ("Paid".equalsIgnoreCase(status)) {
                             statusClass = "status-success";
                         }
                 %>
@@ -122,7 +126,7 @@
                         <form method="post" action="payBills.jsp">
                             <input type="hidden" name="billId" value="<%= bill.getBillId() %>" />
                             <input type="hidden" name="amount" value="<%= bill.getAmount() %>">
-                            <button type="submit" <%= bill.getStatus().equalsIgnoreCase("Success") ? "disabled" : "" %>>
+                            <button type="submit" <%= bill.getStatus().equalsIgnoreCase("Paid") ? "disabled" : "" %>>
                                 Pay Bill
                             </button>
                         </form>
