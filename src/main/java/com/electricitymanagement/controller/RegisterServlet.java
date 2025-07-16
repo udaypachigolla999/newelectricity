@@ -22,6 +22,24 @@ public class RegisterServlet extends HttpServlet {
         String address = req.getParameter("address");
         String password = req.getParameter("password");
         
+        System.out.println("PASS : "+password);
+        String hashedPassword = null;
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes("UTF-8"));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            hashedPassword = hexString.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Optionally handle the error or redirect to an error page
+        }
+        
+        password=hashedPassword;
 
         try {
            

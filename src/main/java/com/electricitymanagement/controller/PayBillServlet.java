@@ -27,7 +27,7 @@ public class PayBillServlet extends HttpServlet {
             } else {
                 req.getSession().setAttribute("msg", "Failed to pay bill.");
             }
-            res.sendRedirect("view-bills");
+            res.sendRedirect("view-billsHistory");
 
         } catch (Exception e) {
             req.setAttribute("error", "Error processing payment: " + e.getMessage());

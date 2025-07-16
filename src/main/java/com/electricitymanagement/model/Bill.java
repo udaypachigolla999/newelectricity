@@ -13,6 +13,8 @@ public class Bill
 	private Date paymentDate; 
 	private Time paymentTime; 
 	
+	private String billingMonthYear;
+	
 	
 	
 	
@@ -90,6 +92,15 @@ public class Bill
 	public void setPaymentTime(Time paymentTime) {
 		this.paymentTime = paymentTime;
 	}
+	
+	public String getBillingMonthYear() {
+	    return billingMonthYear;
+	}
+
+	public void setBillingMonthYear(String billingMonthYear) {
+	    this.billingMonthYear = billingMonthYear;
+	}
+	
 	
 	
 	

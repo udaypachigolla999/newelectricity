@@ -120,6 +120,7 @@
                 <tr>
                     <th>Bill ID</th>
                     <th>Consumer Number</th> 
+                    <th>Billing Month</th>
                     <!-- <th>Payment Id</th> -->
                     <th>Amount</th>
                     <th>Status</th>
@@ -134,6 +135,7 @@
                 <tr>
                     <td><%= bill.getBillId() %></td>
                     <td><%= bill.getCustomerId() %></td> 
+                    <td><%= bill.getBillingMonthYear() %></td>
                     <%-- <td><%= bill.getPaymentId() %></td> --%>
                     <td>&#8377;<%= bill.getAmount() %></td>
                     <td style="color: <%= bill.getStatus().equalsIgnoreCase("Pending") ? "red" : "green" %>;">

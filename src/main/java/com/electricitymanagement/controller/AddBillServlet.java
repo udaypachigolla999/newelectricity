@@ -16,6 +16,7 @@ public class AddBillServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String customerId = request.getParameter("customerId");
         String amountStr = request.getParameter("amount");
+        String billingMonthYear = request.getParameter("month");
 
         try {
             if (!UserDao.customerExists(customerId)) {
@@ -32,8 +33,26 @@ public class AddBillServlet extends HttpServlet {
                 return;
             }
             
+            
+         // Validate month selection
+            if (billingMonthYear == null || billingMonthYear.trim().isEmpty()) {
+                request.setAttribute("error", "Please select a billing month.");
+                request.getRequestDispatcher("addBill.jsp").forward(request, response);
+                return;
+            }
+            
+            boolean value=BillDao.checkBillingMonthYear(customerId,billingMonthYear);
+            
+            if(value)
+            {
+            	request.setAttribute("error", "A bill for " + billingMonthYear + " already exists for this customer.");
+                request.getRequestDispatcher("addBill.jsp").forward(request, response);
+                return;
+            }
+            
             // Create bill with status Pending
             Bill bill = new Bill(customerId, amount, "Pending", null, null, null);
+            bill.setBillingMonthYear(billingMonthYear);
 
             boolean success = BillDao.addBill(bill);
         

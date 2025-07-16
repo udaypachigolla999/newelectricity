@@ -102,6 +102,7 @@
             <table>
                 <tr>
                     <th>Bill ID</th>
+                    <th>Billing Month</th>
                     <th>Amount</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -120,6 +121,7 @@
                 %>
                 <tr>
                     <td><%= bill.getBillId() %></td>
+                    <td><%= bill.getBillingMonthYear() %></td>
                     <td>&#8377;<%= bill.getAmount() %></td>
                     <td class="<%= statusClass %>"><%= status %></td>
                     <td>

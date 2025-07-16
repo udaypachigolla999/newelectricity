@@ -31,7 +31,7 @@ public class BillDao
 
             while (rs.next()) {
             	Bill b=new Bill(rs.getInt("billId"), rs.getString("customerId"), rs.getDouble("amount"), rs.getString("status"), rs.getString("paymentId"),rs.getDate("paymentDate"),rs.getTime("paymentTime"));
-            	
+            	b.setBillingMonthYear(rs.getString("billingMonthYear"));
                 billList.add(b);
             }
 
@@ -55,7 +55,7 @@ public class BillDao
             System.out.println("Inside All BIll final");
             while (rs.next()) {
             	Bill b=new Bill(rs.getInt("billId"), rs.getString("customerId"), rs.getDouble("amount"), rs.getString("status"), rs.getString("paymentId"),rs.getDate("paymentDate"),rs.getTime("paymentTime"));
-            	
+            	b.setBillingMonthYear(rs.getString("billingMonthYear"));
                 billList.add(b);
             }
 
@@ -113,7 +113,7 @@ public class BillDao
 	    try {
 	        Connection con = dbutil.createConnection();
 	        PreparedStatement ps = con.prepareStatement(
-	            "INSERT INTO bill (customerId, amount, status, paymentId, paymentDate, paymentTime) VALUES (?, ?, ?, ?, ?, ?)"
+	            "INSERT INTO bill (customerId, amount, status, paymentId, paymentDate, paymentTime,billingMonthYear) VALUES (?, ?, ?, ?, ?, ?, ?)"
 	        );
 	        ps.setString(1, bill.getCustomerId());
 	        ps.setDouble(2, bill.getAmount());
@@ -121,12 +121,38 @@ public class BillDao
 	        ps.setString(4, bill.getPaymentId()); // null
 	        ps.setDate(5, bill.getPaymentDate()); // null
 	        ps.setTime(6, bill.getPaymentTime()); // null
+	        ps.setString(7, bill.getBillingMonthYear());
 
 	        int rows = ps.executeUpdate();
 	        ps.close();
 	        con.close();
 
 	        return rows > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw new Exception("Error adding bill: " + e.getMessage());
+	    }
+	}
+	public static boolean checkBillingMonthYear(String customerId, String billingMonthYear) throws Exception {
+		DbUtility dbutil = new DbUtility();
+	    try {
+	        Connection con = dbutil.createConnection();
+	        
+	        String sql = "SELECT COUNT(*) FROM bill WHERE customerId = ? AND billingMonthYear = ?";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, customerId);
+	        ps.setString(2, billingMonthYear);
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            return rs.getInt(1) > 0; // true if count > 0
+	        }
+	        
+	        ps.close();
+	        con.close();
+
+	        return false;
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();

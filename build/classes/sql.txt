@@ -4,10 +4,12 @@ create table customer(customerId varchar(30),name varchar(30),email varchar(30),
 create table login(id int GENERATED ALWAYS AS IDENTITY(START WITH 1,INCREMENT BY 1) PRIMARY KEY,
 customerId varchar(30),email varchar(30),userName varchar(30),password varchar(30),role varchar(30));
 
+ALTER TABLE login ALTER COLUMN password SET DATA TYPE VARCHAR(64);
+
 
 create table bill(billId int GENERATED ALWAYS AS IDENTITY(START WITH 1,INCREMENT BY 1) PRIMARY KEY,
 customerId varchar(30),amount decimal(10,2),status varchar(30),
-paymentId varchar(30),paymentDate DATE ,paymentTime TIME);
+paymentId varchar(30),paymentDate DATE ,paymentTime TIME,billingMonthYear varchar(20));
 
 
 create table complaint(complaintId int GENERATED ALWAYS AS IDENTITY(START WITH 1,INCREMENT BY 1) PRIMARY KEY,
@@ -48,7 +50,7 @@ INSERT INTO bill(customerId,amount,status,paymentId,paymentDate,paymentTime) VAL
 update bill set status='Pending' where billid in (1,2,3,4,5,6);
 
 
-update login set role='admin' where id=5;
+update login set role='Admin' where id=3;
 
 
 
