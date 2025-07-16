@@ -171,7 +171,8 @@
 				        <input type="button"
 				               class="btn <%= isActive ? "btn-inactive" : "btn-active" %>"
 				               value="Set <%= isActive ? "Inactive" : "Active" %>"
-				               onclick="confirmStatusChange('Do you want to change the status?', this.form)">
+				               onclick="confirmStatusChange('<%= isActive ? "Inactive" : "Active" %>', this.form)">
+				               
 				    </form>
 				</td>
              
@@ -188,9 +189,10 @@
 </html>
 
 <script type="text/javascript">
-    function confirmStatusChange(message, form) {
-        if (confirm(message)) {
-            form.submit();
-        }
-    }
+function confirmStatusChange(newStatus, form) {
+	if (confirm("Do you want to change the status to '" + newStatus + "'?")) {
+	        form.submit();
+	}
+}
 </script>
+

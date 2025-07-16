@@ -145,6 +145,7 @@
                 </tr>
                 <% for (Complaint c : complaints) {
                        String statusClass = "open".equalsIgnoreCase(c.getStatus()) ? "status-open" : "status-close";
+                       boolean isOpen="Open".equalsIgnoreCase(c.getStatus());
                 %>
                 <tr>
                     <td><%= c.getCustomerId() %></td>
@@ -160,7 +161,8 @@
 					        <input type="button"
 					               class="btn <%= "open".equalsIgnoreCase(c.getStatus()) ? "btn-close" : "btn-open" %>" 
 					               value="Set <%= "open".equalsIgnoreCase(c.getStatus()) ? "Close" : "Open" %>"
-					               onclick="confirmStatusChange('Do you want to change the status?', this.form)">
+					               onclick="confirmStatusChange('<%= isOpen ? "Close" : "Open" %>', this.form)">
+					               
 					    </form>
 					</td>
                     
@@ -173,9 +175,9 @@
 </html>
 
 <script type="text/javascript">
-    function confirmStatusChange(message, form) {
-        if (confirm(message)) {
-            form.submit();
-        }
-    }
+function confirmStatusChange(newStatus, form) {
+	if (confirm("Do you want to change the status to '" + newStatus + "'?")) {
+	        form.submit();
+	}
+}
 </script>

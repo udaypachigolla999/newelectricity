@@ -83,9 +83,15 @@
     <form method="post" action="add-bill">
         <label>Consumer Number:</label>
         <input type="text" name="customerId" required>
+        
+        <label>Number of Units (₹5 per unit):</label>
+		<input type="number" id="units" name="units" required oninput="calculateAmount()" min="0">
+		
+		<label>Amount (₹):</label>
+		<input type="number" id="amount" name="amount" readonly>
+        
 
-        <label>Amount:</label>
-        <input type="number" name="amount" step="0.01" required>
+       
 
 		<label>Billing Month:</label>
     <select name="month" required>
@@ -124,3 +130,17 @@
 
 </body>
 </html>
+
+<script>
+    function calculateAmount() {
+        var units = document.getElementById("units").value;
+        var rate = 5;
+        var amount = 0;
+
+        if (units !== "") {
+            amount = parseFloat(units) * parseFloat(rate);
+        }
+
+        document.getElementById("amount").value = amount.toFixed(2);
+    }
+</script>

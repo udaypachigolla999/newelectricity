@@ -14,7 +14,6 @@
             background-color: #e8f0fe;
         }
 
-
         .container {
             max-width: 800px;
             margin: 40px auto;
@@ -54,15 +53,16 @@
             background-color: #0275d8;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
         }
 
-        button[disabled] {
-            background-color: #ccc;
-            color: #666;
-            cursor: not-allowed;
+        .status-pending {
+            color: red;
+            font-weight: bold;
         }
 
         p {
@@ -70,26 +70,14 @@
             font-size: 16px;
             color: #555;
         }
-         .status-success {
-            color: green;
-            font-weight: bold;
-        }
-
-        .status-pending {
-            color: red;
-            font-weight: bold;
-        }
-        
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
     <jsp:include page="menu.jsp" />
 
-    <!-- Main Content -->
     <div class="container">
-        <h2>My Bill Details</h2>
+        <h2>My Pending Bills</h2>
 
         <%
             List<Bill> bills = (List<Bill>) request.getAttribute("bills");
@@ -98,47 +86,59 @@
             <p>No bills found.</p>
         <%
             } else {
-        %>
-            <table>
-                <tr>
-                    <th>Bill ID</th>
-                    <th>Billing Month</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                <%
-                    for (Bill bill : bills) {
-                    	String status = bill.getStatus();
-                    	if(status.equalsIgnoreCase("Paid"))
-                    	{
-                    		continue;
-                    	}
-                        String statusClass = "status-pending";
-                        if ("Paid".equalsIgnoreCase(status)) {
-                            statusClass = "status-success";
-                        }
-                %>
-                <tr>
-                    <td><%= bill.getBillId() %></td>
-                    <td><%= bill.getBillingMonthYear() %></td>
-                    <td>&#8377;<%= bill.getAmount() %></td>
-                    <td class="<%= statusClass %>"><%= status %></td>
-                    <td>
-                        <form method="post" action="payBills.jsp">
-                            <input type="hidden" name="billId" value="<%= bill.getBillId() %>" />
-                            <input type="hidden" name="amount" value="<%= bill.getAmount() %>">
-                            <button type="submit" <%= bill.getStatus().equalsIgnoreCase("Paid") ? "disabled" : "" %>>
-                                Pay Bill
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                <%
+                double totalUnpaidAmount = 0;
+                List<Bill> unpaidBills = new java.util.ArrayList<>();
+                for (Bill bill : bills) {
+                    if ("Pending".equalsIgnoreCase(bill.getStatus())) {
+                        unpaidBills.add(bill);
+                        totalUnpaidAmount += bill.getAmount();
                     }
-                %>
-            </table>
+                }
+
+                if (unpaidBills.isEmpty()) {
+        %>
+                    <p>All bills are paid.</p>
         <%
+                } else {
+        %>
+            <form method="post" action="payBills.jsp">
+                <table>
+                    <tr>
+                        <th>Bill ID</th>
+                        <th>Billing Month</th>
+                        <th>No. of Units</th> 
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                    <%
+                        for (Bill bill : unpaidBills) {
+                    %>
+                    <tr>
+                        <td><%= bill.getBillId() %></td>
+                        <td><%= bill.getBillingMonthYear() %></td>
+                        <td><%= (int)(bill.getAmount() / 5) %></td>
+                        <td>&#8377;<%= bill.getAmount() %></td>
+                        <td class="status-pending"><%= bill.getStatus() %></td>
+                    </tr>
+                    <input type="hidden" name="billIds" value="<%= bill.getBillId() %>" />
+                    <%
+                        }
+                    %>
+                    
+                </table>
+				
+				<!-- Show Total Amount in a styled div -->
+				<div style="margin-top: 20px; text-align: center;">
+				    <h3 style="color: #0275d8;">Total Amount to Pay: &#8377;<%= totalUnpaidAmount %></h3>
+				</div>
+                
+                <input type="hidden" name="amount" value="<%= totalUnpaidAmount %>">
+                <div style="text-align: center;">
+                    <button type="submit">Pay All Pending Bills</button>
+                </div>
+            </form>
+        <%
+                } // end of unpaidBills check
             }
         %>
     </div>

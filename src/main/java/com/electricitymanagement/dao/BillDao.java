@@ -67,18 +67,19 @@ public class BillDao
 
         return billList;
 	}
-	public static boolean markBillAsPaid(String billId) throws Exception {
+	public static boolean markBillAsPaid(String customerId) throws Exception {
 		DbUtility dbutil=new DbUtility();
 		LocalDate currentDate = LocalDate.now();
 		LocalTime currentTime = LocalTime.now();
 	    try {
 	        Connection con = dbutil.createConnection();
-	        PreparedStatement ps = con.prepareStatement("UPDATE bill SET status = 'Paid', paymentDate = ?, paymentTime = ?, paymentId = ? WHERE billId = ?");
+	        PreparedStatement ps = con.prepareStatement("UPDATE bill SET status = 'Paid', paymentDate = ?, paymentTime = ?, paymentId = ? WHERE customerId = ?");
 	        ps.setDate(1,Date.valueOf(currentDate));
 	        ps.setTime(2,Time.valueOf(currentTime));
 	        ps.setString(3,"PAY" + UUID.randomUUID().toString().replace("-", "").substring(0, 10).toUpperCase());
-	        ps.setString(4, billId);
+	        ps.setString(4, customerId);
 	        int rows = ps.executeUpdate();
+	        System.out.println("NO OF ROWS EFFECETD  : "+rows);
 	        ps.close();
 	        con.close();
 	        return rows > 0;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.electricitymanagement.dao.BillDao;
+import com.electricitymanagement.model.Users;
 
 @WebServlet("/pay-bill")
 public class PayBillServlet extends HttpServlet {
@@ -20,8 +21,11 @@ public class PayBillServlet extends HttpServlet {
         System.out.println();
         System.out.println("IN Paybillservlet");
         
+        Users user = (Users) req.getSession().getAttribute("user");
+
+        
         try {
-            boolean success = BillDao.markBillAsPaid(billId);
+            boolean success = BillDao.markBillAsPaid(user.getCustomerId());
             if (success) {
                 req.getSession().setAttribute("msg", "Bill paid successfully.");
             } else {
